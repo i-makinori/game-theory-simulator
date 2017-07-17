@@ -1,20 +1,66 @@
 
-目的
-ゲーム理論のモデルを示したい
+# game-theory-simulator 
+![](./documents/data/game-theory-simu.png)
 
-ルール
-フィールドに植物を配置それぞれがX点ずつを持つ
+2d expanded Prisoner's dilemma simulator.
 
-それぞれY点ずつ大地にポイントを掛ける
-ターンごとに植物は近隣の植物と駆け引き
-　　	囚人のジレンマをモデル
-	裏切り戦略　協力戦略　オオム返し戦略をもつ
-	
-	植物について
-	自分	相手
-	裏切り	裏切り	: 1.0 
-	裏切り	協力   	: 5.0
-	協力	裏切り 	: 0.0
-	協力	協力	: 3.0
-	係数を基に、大地からポイントが分配される
-ポイントが０以下になった植物は、排除され、近傍の植物の最高得点のものが、分裂する。
+### install and run
+to install this simulator, you need
+- common-lisp (I tested sbcl 1.3)
+- SDL environment (this simulator depends to [lispbuilder-sdl](https://github.com/lispbuilder/lispbuilder))
+
+the way to running this simulator
+
+1. inform where this directory is to the ASDF/common lisp
+`
+(push #P"/where/this/directory/game-theory-simulator/" asdf:*central-registry*)
+`
+don't forget end of path-string '/'
+
+1. using asdf loadsystem to load this package
+`
+(asdf:operate 'asdf:load-op :GAME-THEORY-SIMULATOR)
+`
+1. in to package 
+`(in-package :game-theory-simulator)`
+1. to run simulator,
+`(UI)`
+
+
+### rule 
+
+```
+-------
+|A|A|A|
+-------
+|A|@|A|
+-------
+|A|A|A|
+-------
+```
+
+- `A` or `@` means `plant` planted in cell.
+- each `cell` has `energy` to feed `plant`. 
+- `plant` deel `energy` to adjoing plants
+  - deel is `cooperation` or `betrayal`
+  - after deeling, plants get energy rerated to gain table
+  - gain table is shown in `src/rule.lisp` of  `energy-coefficient-list`
+  - in default rule of `4e2165e` , it is very lucrative to `betrayal nist`
+- `energy` of the `cell` is too lower than adjoining `cell`, plant of the `cell` is changed to highest `energy` plant.
+- `plant` memories strategies of adjoining `plants`
+  - `plant` can decide deel (`cooperation` or `betrayal`) refer to memories
+
+
+### simulation results
+[documents directory](./documents/)
+(todo)
+
+### todo
+- executeable file
+- javascript GUI
+- more useful GUI
+- debug / source refactoring
+- Consideration by many rule-parameters
+- to configure rules easily
+- documentations of Prisoner's dilemma
+
