@@ -1,3 +1,4 @@
+(in-package #:game-theory-simulator)
 
 ;;;; UI ;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defparameter *window-width* 640)

@@ -1,20 +1,4 @@
-
-;;;; package ;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(load "~/quicklisp/setup.lisp")
-(ql:quickload '(:lispbuilder-sdl :lispbuilder-sdl-gfx))
-
-(defpackage :simu
-  (:use :cl :common-lisp-user :sdl))
-
-(in-package :simu)
-  
-;;;; parameters ;;;;;;;;;;;;;;;;;;;;;;;;
-;; system
-(defparameter *above* 0)
-(defparameter *right* 1)
-(defparameter *under* 2)
-(defparameter *left*  3)
-
+(in-package #:game-theory-simulator)
 
 ;;;; list-function
 (defun map-matrix (func matrix)
@@ -86,8 +70,3 @@
 	       (mapcar #'(lambda(x) (list y x))
 		       (x-to-y-list 0 width)))
 	   (x-to-y-list 0 height))))
-
-;; load
-
-(load "field.lisp")
-(load "UI.lisp")
